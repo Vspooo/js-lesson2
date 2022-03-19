@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .user-details{
+        background: silver;
+    }
+    .postContainer {
+        background: orange;
+    }
+
+    .post{
+        background: silver;
+        width: 300px;
+        margin: 3px;
+        margin-left: calc(10% - 300px);
+        margin-right: calc(10% - 300px);
+    }
+
+    .postsDetailsButton{
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+</style>
+<body>
+<h1>Hello page 2</h1>
+<div class="user-details"></div>
+<div class="postContainer"></div>
+<div class="posts"></div>
+<button class="postsDetailsButton">PostDetailsButton</button>
+
+<script>
+    let url = new URL(location.href)
+   let user = JSON.parse(url.searchParams.get('data'))
+    console.log(user)
+let userDetailsContainer =   document.getElementsByClassName('user-details')[0]
+   let  postsDetailsButton = document.getElementsByClassName('postfsDetailsButton')[0]
+   let postsContainer = document.getElementsByClassName('posts')[0]
+userDetailsContainer.innerText = `${JSON.stringify(user)}`
+    postsButton = 'show posts of user'
+    postsDetailsButton.onclick = function (){
+        fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
+        .then(value => value.json())
+        .then(value => {
+            for (const postItem of value) {
+            let postContainer = document.createElement('div')
+                postContainer.classList.add('post')
+                postsContainer.innerText = postItem.title
+                let postDetailsButton = document.createElement('button')
+                postsContainer.append(postContainer,postDetailsButton)
+                postDetailsButton.innerText = 'Post Details Button'
+                postDetailsButton.onclick = function (){
+                location.href = `./post-details.html?data=${JSON.stringify(postItem)}`
+                }
+
+
+                postsContainer.append(postContainer)
+                postContainer.append(postDetailsButton)
+            }
+        })
+    }
+    userDetailsContainer.appendChild(postsButton)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .users {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .user {
+        background: silver;
+        width: 200px;
+        height: 100px;
+        margin-left: calc(25% - 100px);
+        margin-right: calc(25% - 100px);
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+
+<div class="users"></div>
+
+<script>
+
+   let usersConatiner = document.getElementsByClassName('users')[0]
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(value => value.json())
+    .then(value => {
+        for (const userItem of value) {
+          let userContainer =  document.createElement('div')
+            userContainer.classList.add('user')
+          let content =  document.createElement('a')
+            content.innerText = `${userItem.id} - ${userItem.name}`
+            userContainer.appendChild(content)
+            content.href = `./user-details.html?data=${JSON.stringify(userItem)}`
+          usersConatiner.appendChild(userContainer)
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jshomework10.js"> </script>
+</head>
+<style> * {
+    margin: 5px;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+.menu.hidden ul {
+    display: none;
+}
+
+.pHidden {
+    display: none;
+}
+</style>
+<body>
+
+<h3>1 завдання</h3>
+<hr>
+
+<div id="text"><h1>Empty TEXT</h1></div>
+<input type="button" id="button" value="Натисни, щоб сховати текст"/>
+
+
+<h3>2 завдання</h3>
+<hr>
+<input type="text" id="age">
+<input type="button" id="button1" value="Перевірити введений вік">
+
+<h3>3 завдання</h3>
+<hr>
+<div class="menu">
+    <h4 class="title">Список справ на день! НАТИСНИ МЕНЕ</h4>
+    <ul>
+        <li>Перегляд передлекційних відео</li>
+        <li>Домашня робота по Event</li>
+        <li>Лекція від Сергія</li>
+        <li>Практична та додаткове до 03.00 ночі =)</li>
+    </ul>
+</div>
+<hr>
+
+<div id="content"></div>
+
+<script>
+
+//    let click = document.getElementById('text')
+//    let botton = document.getElementById('button')
+//    botton.onclick= function () {
+//        click.style.display = 'none'
+//     }
+
+
+
+    // document.getElementById('button1').onclick = function (){
+    //     let age = document.getElementById('age').value
+    //     if (!age){
+    //         alert('Введіть свій вік!')
+    //     } else if (+age < 18){
+    //         alert('Вам мало років')
+    //     } else {
+    //         alert('Вітаємо на нашому сайті')
+    //     }
+    // }
+
+
+
+
+
+    // let menuElement = document.querySelector('.menu')
+    // let titleElement = document.querySelector('.title')
+    // titleElement.onclick = function () {
+    //     menuElement.classList.toggle('pHidden')
+    // }
+
+
+let comments = [
+    {name: 'Максим', body: 'Вчи English'},
+    {name: 'Іван', body: 'Досить сидіти, вже пізно'},
+    {name: 'Льоня', body: 'Зупка, стине, ходи додому'},
+    {name: 'Іра', body: 'Воно, тобі треба?'},
+];
+
+let MainDiv = document.createElement('div')
+for (const commentsElement of comments) {
+    let div = document.createElement('div')
+    let h3 = document.createElement('h3')
+    let p = document.createElement('p')
+    let butn = document.createElement('button')
+    let hr = document.createElement('hr')
+
+    h3.innerText = commentsElement.name
+    p.innerText = commentsElement.body
+    butn.innerText = 'Закрий мене'
+
+    butn.onclick = () => {
+        p.classList.add('pHidden')
+    }
+    div.append(h3,p,butn)
+    MainDiv.append(div,hr)
+
+}
+document.body.appendChild(MainDiv)
+
+</script>
+</body>
+</html>
